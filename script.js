@@ -1,4 +1,3 @@
-
 const menuButton = document.querySelector(".menu-button");
 const nav = document.querySelector(".nav");
 
@@ -127,7 +126,7 @@ botoes.forEach(function (botao) {
 });
 
 
-// FORMULÁRIO
+// FORMULÁRIO → WHATSAPP
 const form = document.querySelector(".appointment-form");
 
 if (form) {
@@ -136,26 +135,39 @@ if (form) {
 
         event.preventDefault();
 
-        const botao = form.querySelector("button");
+        const nome = document.querySelector("#nome")?.value.trim() || "";
+        const telefone = document.querySelector("#telefone")?.value.trim() || "";
+        const tratamento = document.querySelector("#tratamento")?.value.trim() || "Não informado";
+        const mensagem = document.querySelector("#mensagem")?.value.trim() || "Não informada";
 
-        if (!botao) return;
+        const numeroWhatsApp = "553299078885";
 
-        const textoOriginal = botao.textContent;
+        const texto = 
+`🦷 *Nova solicitação de agendamento*
 
-        botao.textContent = "Solicitação enviada ✓";
-        botao.disabled = true;
+👤 *Nome:* ${nome}
 
-        setTimeout(function () {
+📱 *Telefone:* ${telefone}
 
-            botao.textContent = textoOriginal;
-            botao.disabled = false;
-            form.reset();
+🦷 *Tratamento de interesse:* ${tratamento}
 
-        }, 3000);
+💬 *Mensagem:*
+${mensagem}
+
+Olá! Gostaria de agendar uma consulta.`;
+
+        const linkWhatsApp =
+            "https://wa.me/" +
+            numeroWhatsApp +
+            "?text=" +
+            encodeURIComponent(texto);
+
+        window.open(linkWhatsApp, "_blank");
 
     });
 
 }
+
 
 // SCROLL SUAVE
 const links = document.querySelectorAll('a[href^="#"]');
@@ -199,7 +211,3 @@ window.addEventListener("scroll", function () {
 window.addEventListener("load", function () {
     document.body.classList.add("loaded");
 });
-
-```
-
-`
